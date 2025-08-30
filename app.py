@@ -13,7 +13,7 @@ def index():
         logger.debug("Received POST request with form data: %s", request.form)
 
         if not request.form:
-            logger.warning("Empty form submission")
+            logger.info("Empty form submission")
             return render_template('index.html', error="No form data submitted"), 400
 
         team1 = []
