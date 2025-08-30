@@ -11,6 +11,11 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         logger.debug("Received POST request with form data: %s", request.form)
+
+        if not request.form:
+            logger.warning("Empty form submission")
+            return render_template('index.html', error="No form data submitted"), 400
+
         team1 = []
         team2 = []
 
@@ -31,7 +36,7 @@ def index():
                 logger.debug("Team2 Pet %d: attack=%d health=%d", i, a2, h2)
                 team2.append(Pet(a2, h2))
         except ValueError as e:
-            logger.exception("Invalid or missing form data: %s", e)
+            logger.warning("Invalid or missing form data: %s", e)
             return render_template('index.html', error=str(e)), 400
 
         logger.debug("Constructed teams: team1=%s team2=%s", team1, team2)
