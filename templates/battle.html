@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Battle Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        #log { margin-top: 40px; font-size: 1.2em; min-height: 60px; }
+        button { padding: 10px 20px; font-size: 1em; }
+        #controls { margin-top: 20px; }
+        #stepCounter { margin-top: 10px; color: #555; }
+    </style>
+</head>
+<body>
+<h1>Battle Log</h1>
+<div id="log"></div>
+<div id="controls">
+    <button id="next" onclick="nextStep()">Next Step</button>
+    <div id="stepCounter"></div>
+</div>
+<script>
+    const log = {{ log|tojson }};
+    let step = 0;
+    function showStep(){
+        document.getElementById('log').textContent = log[step];
+        document.getElementById('stepCounter').textContent = (step + 1) + '/' + log.length;
+        if (step >= log.length - 1) {
+            document.getElementById('next').disabled = true;
+        }
+    }
+    function nextStep(){
+        if (step < log.length - 1) {
+            step++;
+            showStep();
+        }
+    }
+    window.onload = showStep;
+</script>
+</body>
+</html>

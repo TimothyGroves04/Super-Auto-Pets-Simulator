@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Super Auto Pets Simulator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .team { display: inline-block; margin-right: 40px; }
+        table { border-collapse: collapse; }
+        th, td { padding: 5px; }
+        h1 { text-align: center; }
+        .submit { margin-top: 20px; text-align: center; }
+        input[type=number] { width: 60px; }
+    </style>
+</head>
+<body>
+<h1>Super Auto Pets Simulator</h1>
+<form method="post">
+    <div class="team">
+        <h2>Team 1</h2>
+        <table>
+            <tr><th>Pet</th><th>Attack</th><th>Health</th></tr>
+            {% for i in range(1,6) %}
+            <tr>
+                <td>{{ i }}</td>
+                <td><input type="number" name="team1_attack_{{i}}" min="1" required></td>
+                <td><input type="number" name="team1_health_{{i}}" min="1" required></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="team">
+        <h2>Team 2</h2>
+        <table>
+            <tr><th>Pet</th><th>Attack</th><th>Health</th></tr>
+            {% for i in range(1,6) %}
+            <tr>
+                <td>{{ i }}</td>
+                <td><input type="number" name="team2_attack_{{i}}" min="1" required></td>
+                <td><input type="number" name="team2_health_{{i}}" min="1" required></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="submit">
+        <button type="submit">Start Battle</button>
+    </div>
+</form>
+</body>
+</html>
