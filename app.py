@@ -20,10 +20,13 @@ def index():
         team2 = []
 
         def get_int_field(name: str) -> int:
-            value = request.form.get(name)
-            if value is None or value == "":
+            raw = request.form.get(name, "").strip()
+            if not raw:
                 raise ValueError(f"Missing field: {name}")
-            return int(value)
+            try:
+                return int(raw)
+            except ValueError:
+                raise ValueError(f"Invalid integer for field: {name}")
 
         try:
             for i in range(1, 6):
